@@ -29,7 +29,7 @@ notebooks = [
   "pandas>=2.2,<4.0",
   "scikit-learn>=1.5,<2.0",
 ]
-dev = ["pytest>=8.3,<9.0", "ruff>=0.9,<1.0"]
+dev = ["pytest>=8.3,<10.0", "ruff>=0.9,<1.0"]
 
 [project.scripts]
 supplychain-guardian = "supplychain_guardian.cli:main"
