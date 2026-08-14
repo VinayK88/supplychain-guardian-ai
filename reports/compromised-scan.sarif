@@ -1,0 +1,393 @@
+{
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "SupplyChain Guardian AI",
+          "informationUri": "https://github.com/VinayK88/supplychain-guardian-ai",
+          "rules": [
+            {
+              "id": "PROV-001-DIGEST",
+              "name": "Artifact digest does not match the attested subject",
+              "shortDescription": {
+                "text": "Artifact digest does not match the attested subject"
+              },
+              "help": {
+                "text": "Quarantine the artifact and rebuild it from a trusted, verified workflow."
+              },
+              "properties": {
+                "category": "provenance",
+                "severity": "critical"
+              }
+            },
+            {
+              "id": "CI-release-2-PIPE-SHELL",
+              "name": "Downloaded content is piped directly to a shell",
+              "shortDescription": {
+                "text": "Downloaded content is piped directly to a shell"
+              },
+              "help": {
+                "text": "Download, verify a pinned digest or signature, then execute from a trusted path."
+              },
+              "properties": {
+                "category": "ci-cd",
+                "severity": "critical"
+              }
+            },
+            {
+              "id": "SBOM-006-VULNERABLE",
+              "name": "Critical-severity vulnerable component",
+              "shortDescription": {
+                "text": "Critical-severity vulnerable component"
+              },
+              "help": {
+                "text": "Upgrade, remove, or isolate the component after validating reachability."
+              },
+              "properties": {
+                "category": "vulnerability",
+                "severity": "critical"
+              }
+            },
+            {
+              "id": "SBOM-005-TYPOSQUAT",
+              "name": "Dependency name resembles a protected package",
+              "shortDescription": {
+                "text": "Dependency name resembles a protected package"
+              },
+              "help": {
+                "text": "Quarantine the package, verify the publisher and lock the intended dependency."
+              },
+              "properties": {
+                "category": "dependency",
+                "severity": "critical"
+              }
+            },
+            {
+              "id": "PROV-002-SIGNATURE",
+              "name": "Build provenance is not signed",
+              "shortDescription": {
+                "text": "Build provenance is not signed"
+              },
+              "help": {
+                "text": "Generate and verify a Sigstore-backed artifact attestation."
+              },
+              "properties": {
+                "category": "provenance",
+                "severity": "high"
+              }
+            },
+            {
+              "id": "PROV-003-TRANSPARENCY",
+              "name": "Attestation is absent from the transparency log",
+              "shortDescription": {
+                "text": "Attestation is absent from the transparency log"
+              },
+              "help": {
+                "text": "Verify inclusion and identity with the platform attestation verifier."
+              },
+              "properties": {
+                "category": "provenance",
+                "severity": "high"
+              }
+            },
+            {
+              "id": "PROV-004-BUILDER",
+              "name": "Artifact was produced by an unexpected builder identity",
+              "shortDescription": {
+                "text": "Artifact was produced by an unexpected builder identity"
+              },
+              "help": {
+                "text": "Block promotion and verify repository, workflow, and OIDC identity claims."
+              },
+              "properties": {
+                "category": "provenance",
+                "severity": "high"
+              }
+            },
+            {
+              "id": "CI-001-WRITE-ALL",
+              "name": "Workflow grants write-all permissions",
+              "shortDescription": {
+                "text": "Workflow grants write-all permissions"
+              },
+              "help": {
+                "text": "Set read-only defaults and grant narrow job-level permissions."
+              },
+              "properties": {
+                "category": "ci-cd",
+                "severity": "high"
+              }
+            },
+            {
+              "id": "CI-002-PR-TARGET",
+              "name": "Privileged pull_request_target trigger is enabled",
+              "shortDescription": {
+                "text": "Privileged pull_request_target trigger is enabled"
+              },
+              "help": {
+                "text": "Use pull_request or strictly separate untrusted checkout from privileged steps."
+              },
+              "properties": {
+                "category": "ci-cd",
+                "severity": "high"
+              }
+            },
+            {
+              "id": "CI-release-3-SECRET",
+              "name": "Secret is interpolated directly into a shell command",
+              "shortDescription": {
+                "text": "Secret is interpolated directly into a shell command"
+              },
+              "help": {
+                "text": "Pass secrets through a narrowly scoped environment variable and avoid echoing them."
+              },
+              "properties": {
+                "category": "ci-cd",
+                "severity": "high"
+              }
+            },
+            {
+              "id": "SBOM-005-PUBLISHER",
+              "name": "New publisher identity coincides with a download spike",
+              "shortDescription": {
+                "text": "New publisher identity coincides with a download spike"
+              },
+              "help": {
+                "text": "Require maintainer verification and provenance before promotion."
+              },
+              "properties": {
+                "category": "dependency",
+                "severity": "high"
+              }
+            },
+            {
+              "id": "SBOM-006-UNPINNED",
+              "name": "Dependency version is not pinned",
+              "shortDescription": {
+                "text": "Dependency version is not pinned"
+              },
+              "help": {
+                "text": "Resolve and lock an immutable dependency version and hash."
+              },
+              "properties": {
+                "category": "dependency",
+                "severity": "medium"
+              }
+            },
+            {
+              "id": "CI-RELEASE-RUNNER",
+              "name": "Untrusted workflow can reach a self-hosted runner",
+              "shortDescription": {
+                "text": "Untrusted workflow can reach a self-hosted runner"
+              },
+              "help": {
+                "text": "Use isolated ephemeral runners and restrict which triggers can reach them."
+              },
+              "properties": {
+                "category": "ci-cd",
+                "severity": "medium"
+              }
+            },
+            {
+              "id": "CI-release-1-ACTION-REF",
+              "name": "Third-party action is not pinned to a full commit SHA",
+              "shortDescription": {
+                "text": "Third-party action is not pinned to a full commit SHA"
+              },
+              "help": {
+                "text": "Pin the action to a reviewed 40-character commit SHA."
+              },
+              "properties": {
+                "category": "ci-cd",
+                "severity": "medium"
+              }
+            },
+            {
+              "id": "CI-release-4-ACTION-REF",
+              "name": "Third-party action is not pinned to a full commit SHA",
+              "shortDescription": {
+                "text": "Third-party action is not pinned to a full commit SHA"
+              },
+              "help": {
+                "text": "Pin the action to a reviewed 40-character commit SHA."
+              },
+              "properties": {
+                "category": "ci-cd",
+                "severity": "medium"
+              }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "PROV-001-DIGEST",
+          "level": "error",
+          "message": {
+            "text": "dist/guardian_app-1.4.3-rc1-py3-none-any.whl: Claimed digest bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb; observed cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc."
+          },
+          "properties": {
+            "confidence": 1.0,
+            "blastRadius": 6
+          }
+        },
+        {
+          "ruleId": "CI-release-2-PIPE-SHELL",
+          "level": "error",
+          "message": {
+            "text": "release step 2: The run command executes network-fetched content without integrity verification."
+          },
+          "properties": {
+            "confidence": 1.0,
+            "blastRadius": 5
+          }
+        },
+        {
+          "ruleId": "SBOM-006-VULNERABLE",
+          "level": "error",
+          "message": {
+            "text": "build-helper@latest: Fixture maps this component to SYNTH-2026-0007 (critical)."
+          },
+          "properties": {
+            "confidence": 1.0,
+            "blastRadius": 4
+          }
+        },
+        {
+          "ruleId": "SBOM-005-TYPOSQUAT",
+          "level": "error",
+          "message": {
+            "text": "reqeusts@99.0.0: Observed 'reqeusts' while the expected package is 'requests'."
+          },
+          "properties": {
+            "confidence": 0.98,
+            "blastRadius": 3
+          }
+        },
+        {
+          "ruleId": "PROV-002-SIGNATURE",
+          "level": "error",
+          "message": {
+            "text": "dist/guardian_app-1.4.3-rc1-py3-none-any.whl: The demo attestation has no recorded signature."
+          },
+          "properties": {
+            "confidence": 1.0,
+            "blastRadius": 5
+          }
+        },
+        {
+          "ruleId": "PROV-003-TRANSPARENCY",
+          "level": "error",
+          "message": {
+            "text": "dist/guardian_app-1.4.3-rc1-py3-none-any.whl: Transparency log inclusion is false or missing."
+          },
+          "properties": {
+            "confidence": 1.0,
+            "blastRadius": 5
+          }
+        },
+        {
+          "ruleId": "PROV-004-BUILDER",
+          "level": "error",
+          "message": {
+            "text": "dist/guardian_app-1.4.3-rc1-py3-none-any.whl: Expected 'https://github.com/VinayK88/supplychain-guardian-ai/.github/workflows/release.yml'; observed 'https://github.com/example-untrusted/fork/.github/workflows/build.yml'."
+          },
+          "properties": {
+            "confidence": 1.0,
+            "blastRadius": 5
+          }
+        },
+        {
+          "ruleId": "CI-001-WRITE-ALL",
+          "level": "error",
+          "message": {
+            "text": "workflow permissions: Top-level permissions is set to write-all."
+          },
+          "properties": {
+            "confidence": 1.0,
+            "blastRadius": 4
+          }
+        },
+        {
+          "ruleId": "CI-002-PR-TARGET",
+          "level": "error",
+          "message": {
+            "text": "workflow trigger: The workflow runs in the base repository context for pull_request_target."
+          },
+          "properties": {
+            "confidence": 1.0,
+            "blastRadius": 4
+          }
+        },
+        {
+          "ruleId": "CI-release-3-SECRET",
+          "level": "error",
+          "message": {
+            "text": "release step 3: A GitHub secret expression appears inside run:, increasing log and injection risk."
+          },
+          "properties": {
+            "confidence": 1.0,
+            "blastRadius": 4
+          }
+        },
+        {
+          "ruleId": "SBOM-005-PUBLISHER",
+          "level": "error",
+          "message": {
+            "text": "reqeusts@99.0.0: Publisher age is 2 days and the synthetic download ratio is 34.0x."
+          },
+          "properties": {
+            "confidence": 0.86,
+            "blastRadius": 3
+          }
+        },
+        {
+          "ruleId": "SBOM-006-UNPINNED",
+          "level": "warning",
+          "message": {
+            "text": "build-helper@latest: Version field is 'latest'."
+          },
+          "properties": {
+            "confidence": 1.0,
+            "blastRadius": 4
+          }
+        },
+        {
+          "ruleId": "CI-RELEASE-RUNNER",
+          "level": "warning",
+          "message": {
+            "text": "release: runs-on is configured as ['self-hosted', 'production']."
+          },
+          "properties": {
+            "confidence": 1.0,
+            "blastRadius": 3
+          }
+        },
+        {
+          "ruleId": "CI-release-1-ACTION-REF",
+          "level": "warning",
+          "message": {
+            "text": "release step 1: Action reference is 'actions/checkout@main'."
+          },
+          "properties": {
+            "confidence": 1.0,
+            "blastRadius": 2
+          }
+        },
+        {
+          "ruleId": "CI-release-4-ACTION-REF",
+          "level": "warning",
+          "message": {
+            "text": "release step 4: Action reference is 'example/release-action@v1'."
+          },
+          "properties": {
+            "confidence": 1.0,
+            "blastRadius": 2
+          }
+        }
+      ]
+    }
+  ]
+}

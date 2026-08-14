@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "supplychain-guardian-ai"
+version = "0.1.0"
+description = "Explainable software supply-chain and CI/CD risk analysis with safe synthetic demos"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Vinay K" }]
+dependencies = ["PyYAML>=6.0,<7.0"]
+keywords = ["cybersecurity", "supply-chain", "sbom", "devsecops", "machine-learning"]
+
+[project.optional-dependencies]
+app = [
+  "fastapi>=0.115,<1.0",
+  "plotly>=5.24,<7.0",
+  "streamlit>=1.41,<2.0",
+  "uvicorn[standard]>=0.34,<1.0",
+]
+notebooks = [
+  "ipykernel>=6.29,<8.0",
+  "jupyter>=1.1,<2.0",
+  "matplotlib>=3.9,<4.0",
+  "networkx>=3.4,<4.0",
+  "numpy>=2.0,<3.0",
+  "pandas>=2.2,<4.0",
+  "scikit-learn>=1.5,<2.0",
+]
+dev = ["pytest>=8.3,<9.0", "ruff>=0.9,<1.0"]
+
+[project.scripts]
+supplychain-guardian = "supplychain_guardian.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+

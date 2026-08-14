@@ -1,0 +1,244 @@
+{
+  "scenario": "compromised",
+  "generated_at": "2026-08-14T00:00:00+00:00",
+  "data_classification": "synthetic-demo",
+  "summary": {
+    "risk_score": 100,
+    "decision": "BLOCK",
+    "model_probability": 0.999999,
+    "components_scanned": 7,
+    "workflow_steps_scanned": 4,
+    "artifact_name": "dist/guardian_app-1.4.3-rc1-py3-none-any.whl",
+    "finding_count": 15,
+    "severity_counts": {
+      "critical": 4,
+      "high": 7,
+      "medium": 4,
+      "low": 0,
+      "info": 0
+    },
+    "max_blast_radius": 6
+  },
+  "model": {
+    "version": "guardian-logistic-v1",
+    "features": {
+      "critical_count": 4.0,
+      "high_count": 7.0,
+      "medium_count": 4.0,
+      "low_count": 0.0,
+      "provenance_failures": 4.0,
+      "workflow_exposures": 7.0,
+      "vulnerable_components": 2.0,
+      "blast_ratio": 0.8571
+    },
+    "explanation": [
+      {
+        "feature": "critical_count",
+        "value": 4.0,
+        "contribution": 6.2894
+      },
+      {
+        "feature": "high_count",
+        "value": 7.0,
+        "contribution": 2.8961
+      },
+      {
+        "feature": "provenance_failures",
+        "value": 4.0,
+        "contribution": 1.4328
+      },
+      {
+        "feature": "workflow_exposures",
+        "value": 7.0,
+        "contribution": 1.2141
+      },
+      {
+        "feature": "blast_ratio",
+        "value": 0.8571,
+        "contribution": 0.7886
+      },
+      {
+        "feature": "vulnerable_components",
+        "value": 2.0,
+        "contribution": 0.2408
+      },
+      {
+        "feature": "medium_count",
+        "value": 4.0,
+        "contribution": 0.1914
+      },
+      {
+        "feature": "low_count",
+        "value": 0.0,
+        "contribution": 0.1283
+      }
+    ]
+  },
+  "findings": [
+    {
+      "finding_id": "PROV-001-DIGEST",
+      "title": "Artifact digest does not match the attested subject",
+      "severity": "critical",
+      "category": "provenance",
+      "subject": "dist/guardian_app-1.4.3-rc1-py3-none-any.whl",
+      "evidence": "Claimed digest bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb; observed cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc.",
+      "remediation": "Quarantine the artifact and rebuild it from a trusted, verified workflow.",
+      "confidence": 1.0,
+      "blast_radius": 6
+    },
+    {
+      "finding_id": "CI-release-2-PIPE-SHELL",
+      "title": "Downloaded content is piped directly to a shell",
+      "severity": "critical",
+      "category": "ci-cd",
+      "subject": "release step 2",
+      "evidence": "The run command executes network-fetched content without integrity verification.",
+      "remediation": "Download, verify a pinned digest or signature, then execute from a trusted path.",
+      "confidence": 1.0,
+      "blast_radius": 5
+    },
+    {
+      "finding_id": "SBOM-006-VULNERABLE",
+      "title": "Critical-severity vulnerable component",
+      "severity": "critical",
+      "category": "vulnerability",
+      "subject": "build-helper@latest",
+      "evidence": "Fixture maps this component to SYNTH-2026-0007 (critical).",
+      "remediation": "Upgrade, remove, or isolate the component after validating reachability.",
+      "confidence": 1.0,
+      "blast_radius": 4
+    },
+    {
+      "finding_id": "SBOM-005-TYPOSQUAT",
+      "title": "Dependency name resembles a protected package",
+      "severity": "critical",
+      "category": "dependency",
+      "subject": "reqeusts@99.0.0",
+      "evidence": "Observed 'reqeusts' while the expected package is 'requests'.",
+      "remediation": "Quarantine the package, verify the publisher and lock the intended dependency.",
+      "confidence": 0.98,
+      "blast_radius": 3
+    },
+    {
+      "finding_id": "PROV-002-SIGNATURE",
+      "title": "Build provenance is not signed",
+      "severity": "high",
+      "category": "provenance",
+      "subject": "dist/guardian_app-1.4.3-rc1-py3-none-any.whl",
+      "evidence": "The demo attestation has no recorded signature.",
+      "remediation": "Generate and verify a Sigstore-backed artifact attestation.",
+      "confidence": 1.0,
+      "blast_radius": 5
+    },
+    {
+      "finding_id": "PROV-003-TRANSPARENCY",
+      "title": "Attestation is absent from the transparency log",
+      "severity": "high",
+      "category": "provenance",
+      "subject": "dist/guardian_app-1.4.3-rc1-py3-none-any.whl",
+      "evidence": "Transparency log inclusion is false or missing.",
+      "remediation": "Verify inclusion and identity with the platform attestation verifier.",
+      "confidence": 1.0,
+      "blast_radius": 5
+    },
+    {
+      "finding_id": "PROV-004-BUILDER",
+      "title": "Artifact was produced by an unexpected builder identity",
+      "severity": "high",
+      "category": "provenance",
+      "subject": "dist/guardian_app-1.4.3-rc1-py3-none-any.whl",
+      "evidence": "Expected 'https://github.com/VinayK88/supplychain-guardian-ai/.github/workflows/release.yml'; observed 'https://github.com/example-untrusted/fork/.github/workflows/build.yml'.",
+      "remediation": "Block promotion and verify repository, workflow, and OIDC identity claims.",
+      "confidence": 1.0,
+      "blast_radius": 5
+    },
+    {
+      "finding_id": "CI-001-WRITE-ALL",
+      "title": "Workflow grants write-all permissions",
+      "severity": "high",
+      "category": "ci-cd",
+      "subject": "workflow permissions",
+      "evidence": "Top-level permissions is set to write-all.",
+      "remediation": "Set read-only defaults and grant narrow job-level permissions.",
+      "confidence": 1.0,
+      "blast_radius": 4
+    },
+    {
+      "finding_id": "CI-002-PR-TARGET",
+      "title": "Privileged pull_request_target trigger is enabled",
+      "severity": "high",
+      "category": "ci-cd",
+      "subject": "workflow trigger",
+      "evidence": "The workflow runs in the base repository context for pull_request_target.",
+      "remediation": "Use pull_request or strictly separate untrusted checkout from privileged steps.",
+      "confidence": 1.0,
+      "blast_radius": 4
+    },
+    {
+      "finding_id": "CI-release-3-SECRET",
+      "title": "Secret is interpolated directly into a shell command",
+      "severity": "high",
+      "category": "ci-cd",
+      "subject": "release step 3",
+      "evidence": "A GitHub secret expression appears inside run:, increasing log and injection risk.",
+      "remediation": "Pass secrets through a narrowly scoped environment variable and avoid echoing them.",
+      "confidence": 1.0,
+      "blast_radius": 4
+    },
+    {
+      "finding_id": "SBOM-005-PUBLISHER",
+      "title": "New publisher identity coincides with a download spike",
+      "severity": "high",
+      "category": "dependency",
+      "subject": "reqeusts@99.0.0",
+      "evidence": "Publisher age is 2 days and the synthetic download ratio is 34.0x.",
+      "remediation": "Require maintainer verification and provenance before promotion.",
+      "confidence": 0.86,
+      "blast_radius": 3
+    },
+    {
+      "finding_id": "SBOM-006-UNPINNED",
+      "title": "Dependency version is not pinned",
+      "severity": "medium",
+      "category": "dependency",
+      "subject": "build-helper@latest",
+      "evidence": "Version field is 'latest'.",
+      "remediation": "Resolve and lock an immutable dependency version and hash.",
+      "confidence": 1.0,
+      "blast_radius": 4
+    },
+    {
+      "finding_id": "CI-RELEASE-RUNNER",
+      "title": "Untrusted workflow can reach a self-hosted runner",
+      "severity": "medium",
+      "category": "ci-cd",
+      "subject": "release",
+      "evidence": "runs-on is configured as ['self-hosted', 'production'].",
+      "remediation": "Use isolated ephemeral runners and restrict which triggers can reach them.",
+      "confidence": 1.0,
+      "blast_radius": 3
+    },
+    {
+      "finding_id": "CI-release-1-ACTION-REF",
+      "title": "Third-party action is not pinned to a full commit SHA",
+      "severity": "medium",
+      "category": "ci-cd",
+      "subject": "release step 1",
+      "evidence": "Action reference is 'actions/checkout@main'.",
+      "remediation": "Pin the action to a reviewed 40-character commit SHA.",
+      "confidence": 1.0,
+      "blast_radius": 2
+    },
+    {
+      "finding_id": "CI-release-4-ACTION-REF",
+      "title": "Third-party action is not pinned to a full commit SHA",
+      "severity": "medium",
+      "category": "ci-cd",
+      "subject": "release step 4",
+      "evidence": "Action reference is 'example/release-action@v1'.",
+      "remediation": "Pin the action to a reviewed 40-character commit SHA.",
+      "confidence": 1.0,
+      "blast_radius": 2
+    }
+  ]
+}

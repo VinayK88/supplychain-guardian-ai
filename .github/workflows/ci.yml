@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout immutable source revision
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install package
+        run: python -m pip install -e ".[app]"
+      - name: Run unit tests
+        run: python -m unittest discover -s tests -v
+      - name: Reproduce both policy decisions
+        run: |
+          supplychain-guardian scan --scenario secure --output /tmp/secure.json
+          supplychain-guardian scan --scenario compromised --output /tmp/compromised.json
+      - name: Smoke-test API and dashboard
+        run: |
+          uvicorn supplychain_guardian.api:app --host 127.0.0.1 --port 8000 > /tmp/api.log 2>&1 &
+          API_PID=$!
+          streamlit run dashboard/app.py --server.headless=true --server.address=127.0.0.1 --server.port=8501 > /tmp/dashboard.log 2>&1 &
+          DASHBOARD_PID=$!
+          trap 'kill $API_PID $DASHBOARD_PID' EXIT
+          python - <<'PY'
+          import time
+          import urllib.request
+
+          for url in ["http://127.0.0.1:8000/health", "http://127.0.0.1:8501/_stcore/health"]:
+              for _ in range(30):
+                  try:
+                      with urllib.request.urlopen(url, timeout=2) as response:
+                          assert response.status == 200
+                      break
+                  except Exception:
+                      time.sleep(1)
+              else:
+                  raise RuntimeError(f"Service did not become healthy: {url}")
+          PY

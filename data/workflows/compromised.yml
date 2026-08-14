@@ -1,0 +1,21 @@
+name: Synthetic risky release
+
+on:
+  pull_request_target:
+    types: [opened, synchronize]
+
+permissions: write-all
+
+jobs:
+  release:
+    runs-on: [self-hosted, production]
+    steps:
+      - name: Checkout untrusted source
+        uses: actions/checkout@main
+      - name: Install synthetic helper
+        run: curl https://example.invalid/bootstrap.sh | bash
+      - name: Publish
+        run: echo "${{ secrets.RELEASE_TOKEN }}" | synthetic-publisher --token-stdin
+      - name: Create release
+        uses: example/release-action@v1
+

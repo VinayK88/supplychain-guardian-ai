@@ -1,0 +1,83 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:22222222-2222-4222-8222-222222222222",
+  "version": 1,
+  "metadata": {
+    "component": {"type": "application", "bom-ref": "guardian-app", "name": "guardian-app", "version": "1.4.3-rc1"},
+    "properties": [{"name": "guardian:fixture", "value": "synthetic-compromise"}]
+  },
+  "components": [
+    {
+      "type": "application",
+      "bom-ref": "guardian-app",
+      "name": "guardian-app",
+      "version": "1.4.3-rc1",
+      "purl": "pkg:generic/guardian-app@1.4.3-rc1"
+    },
+    {
+      "type": "application",
+      "bom-ref": "gateway",
+      "name": "gateway-service",
+      "version": "4.8.0",
+      "purl": "pkg:generic/gateway-service@4.8.0"
+    },
+    {
+      "type": "application",
+      "bom-ref": "trainer",
+      "name": "training-service",
+      "version": "3.1.0",
+      "purl": "pkg:generic/training-service@3.1.0"
+    },
+    {
+      "type": "application",
+      "bom-ref": "agent-runtime",
+      "name": "agent-runtime",
+      "version": "2.7.1",
+      "purl": "pkg:generic/agent-runtime@2.7.1"
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/reqeusts@99.0.0",
+      "name": "reqeusts",
+      "version": "99.0.0",
+      "purl": "pkg:pypi/reqeusts@99.0.0",
+      "properties": [
+        {"name": "guardian:expected_name", "value": "requests"},
+        {"name": "guardian:maintainer_age_days", "value": "2"},
+        {"name": "guardian:download_spike", "value": "34"},
+        {"name": "guardian:reachable_services", "value": "gateway,trainer,agent-runtime"}
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/build-helper@latest",
+      "name": "build-helper",
+      "version": "latest",
+      "purl": "pkg:pypi/build-helper@latest",
+      "properties": [
+        {"name": "guardian:vulnerability_severity", "value": "critical"},
+        {"name": "guardian:advisory", "value": "SYNTH-2026-0007"},
+        {"name": "guardian:reachable_services", "value": "gateway,trainer,agent-runtime,release-worker"}
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/pydantic@2.11.7",
+      "name": "pydantic",
+      "version": "2.11.7",
+      "purl": "pkg:pypi/pydantic@2.11.7",
+      "properties": [{"name": "guardian:reachable_services", "value": "gateway,agent-runtime"}]
+    }
+  ],
+  "dependencies": [
+    {"ref": "guardian-app", "dependsOn": ["gateway", "trainer", "agent-runtime"]},
+    {"ref": "gateway", "dependsOn": ["pkg:pypi/reqeusts@99.0.0", "pkg:pypi/build-helper@latest", "pkg:pypi/pydantic@2.11.7"]},
+    {"ref": "trainer", "dependsOn": ["pkg:pypi/reqeusts@99.0.0", "pkg:pypi/build-helper@latest"]},
+    {"ref": "agent-runtime", "dependsOn": ["pkg:pypi/reqeusts@99.0.0", "pkg:pypi/pydantic@2.11.7"]},
+    {"ref": "pkg:pypi/reqeusts@99.0.0", "dependsOn": []},
+    {"ref": "pkg:pypi/build-helper@latest", "dependsOn": []},
+    {"ref": "pkg:pypi/pydantic@2.11.7", "dependsOn": []}
+  ]
+}
+

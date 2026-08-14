@@ -1,0 +1,78 @@
+{
+  "scenario": "secure",
+  "generated_at": "2026-08-14T00:00:00+00:00",
+  "data_classification": "synthetic-demo",
+  "summary": {
+    "risk_score": 4,
+    "decision": "ALLOW",
+    "model_probability": 0.040307,
+    "components_scanned": 5,
+    "workflow_steps_scanned": 3,
+    "artifact_name": "dist/guardian_app-1.4.2-py3-none-any.whl",
+    "finding_count": 0,
+    "severity_counts": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "info": 0
+    },
+    "max_blast_radius": 0
+  },
+  "model": {
+    "version": "guardian-logistic-v1",
+    "features": {
+      "critical_count": 0.0,
+      "high_count": 0.0,
+      "medium_count": 0.0,
+      "low_count": 0.0,
+      "provenance_failures": 0.0,
+      "workflow_exposures": 0.0,
+      "vulnerable_components": 0.0,
+      "blast_ratio": 0.0
+    },
+    "explanation": [
+      {
+        "feature": "high_count",
+        "value": 0.0,
+        "contribution": -1.1161
+      },
+      {
+        "feature": "blast_ratio",
+        "value": 0.0,
+        "contribution": -0.9215
+      },
+      {
+        "feature": "critical_count",
+        "value": 0.0,
+        "contribution": -0.6666
+      },
+      {
+        "feature": "provenance_failures",
+        "value": 0.0,
+        "contribution": -0.3707
+      },
+      {
+        "feature": "workflow_exposures",
+        "value": 0.0,
+        "contribution": -0.3549
+      },
+      {
+        "feature": "vulnerable_components",
+        "value": 0.0,
+        "contribution": -0.2026
+      },
+      {
+        "feature": "medium_count",
+        "value": 0.0,
+        "contribution": -0.1484
+      },
+      {
+        "feature": "low_count",
+        "value": 0.0,
+        "contribution": 0.1283
+      }
+    ]
+  },
+  "findings": []
+}

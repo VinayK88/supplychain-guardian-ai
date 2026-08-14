@@ -1,0 +1,22 @@
+name: Secure release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout reviewed source
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Build deterministic artifact
+        run: python -m build
+      - name: Verify local digest
+        run: sha256sum dist/*
+

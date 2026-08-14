@@ -1,0 +1,21 @@
+{
+  "_type": "https://in-toto.io/Statement/v1",
+  "subject": [
+    {
+      "name": "dist/guardian_app-1.4.2-py3-none-any.whl",
+      "digest": {"sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}
+    }
+  ],
+  "observed_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "predicateType": "https://slsa.dev/provenance/v1",
+  "predicate": {
+    "builder": {"id": "https://github.com/VinayK88/supplychain-guardian-ai/.github/workflows/release.yml"},
+    "buildType": "https://actions.github.io/buildtypes/workflow/v1"
+  },
+  "signature": {"present": true, "issuer": "https://token.actions.githubusercontent.com"},
+  "transparency_log": {"included": true, "log_index": 4242},
+  "policy": {
+    "expected_builder": "https://github.com/VinayK88/supplychain-guardian-ai/.github/workflows/release.yml"
+  }
+}
+
