@@ -25,6 +25,16 @@ SupplyChain Guardian AI answers one practical question:
 
 It combines deterministic security evidence, dependency-graph reachability, a small auditable ML risk model, and a policy gate. The checked-in demo is safe and fully synthetic: it does not download packages, execute untrusted code, access registries, or modify a real release.
 
+## 60-second reviewer path
+
+Short on time? Review the project in this order:
+
+1. [Understand the supply-chain security problem](#eli5-explain-it-like-i-am-five).
+2. [Inspect the checked-in baseline and honest interpretation](#checked-in-baseline).
+3. [Follow the evidence and policy architecture](#architecture).
+4. [Open the executed notebooks](#executed-notebooks).
+5. [Reproduce the demo locally](#quick-start).
+
 ## ELI5: explain it like I am five
 
 Imagine a toy factory receives a box of parts:
